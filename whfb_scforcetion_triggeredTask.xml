@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-16"?>
+<Task version="1.2" xmlns="http://schemas.microsoft.com/windows/2004/02/mit/task">
+  <RegistrationInfo>
+    <Description>Triggered by WHfB Enrollment</Description>
+  </RegistrationInfo>
+  <Triggers>
+	<EventTrigger>
+      <Enabled>true</Enabled>
+      <Subscription>&lt;QueryList&gt;&lt;Query Id="0" Path="Microsoft-Windows-HelloForBusiness/Operational"&gt;&lt;Select Path="Microsoft-Windows-HelloForBusiness/Operational"&gt;*[System[Provider[@Name='Microsoft-Windows-HelloForBusiness'] and EventID=5555]]&lt;/Select&gt;&lt;/Query&gt;&lt;/QueryList&gt;</Subscription>
+    </EventTrigger>
+  </Triggers>
+  <Principals>
+    <Principal id="Author">
+      <UserId>NT AUTHORITY\SYSTEM</UserId>
+      <RunLevel>HighestAvailable</RunLevel>
+    </Principal>
+  </Principals>
+  <Settings>
+    <MultipleInstancesPolicy>IgnoreNew</MultipleInstancesPolicy>
+    <DisallowStartIfOnBatteries>true</DisallowStartIfOnBatteries>
+    <StopIfGoingOnBatteries>true</StopIfGoingOnBatteries>
+    <AllowHardTerminate>true</AllowHardTerminate>
+    <StartWhenAvailable>false</StartWhenAvailable>
+    <RunOnlyIfNetworkAvailable>false</RunOnlyIfNetworkAvailable>
+  </Settings>
+  <Actions Context="Author">
+    <Exec>
+      <Command>C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe</Command>
+      <Arguments>-File C:\scripts\scforceoption_enable.ps1</Arguments>
+    </Exec>
+  </Actions>
+</Task>
